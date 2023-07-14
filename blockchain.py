@@ -9,8 +9,6 @@ from typing import Any, Dict, List
 import requests
 from argparse import ArgumentParser # 命令行参数解析
 
-node_identifier="1"
-
 # 交易
 class Transaction:
     def __init__(self, sender, recipient, amount):
