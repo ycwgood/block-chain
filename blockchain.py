@@ -131,7 +131,7 @@ class BlockChain:
         """验证链是否合理：最长且有效
 
         Args:
-            chain (List[Dict[str, Any]]): 传入链
+            chain (List[Block]): 传入链
 
         Returns:
             bool: 返回是否有效
@@ -146,10 +146,6 @@ class BlockChain:
             print("\n-----------\n")
             # 如果当前区块的前哈希和前一个计算出来的哈希值不同则是无效链
             if block.previous_hash != self.hash(last_block):
-                return False
-
-            # 检验工作量证明是否符合要求
-            if not self.valid_proof(last_block['proof'], block['proof']):
                 return False
 
             last_block = block
