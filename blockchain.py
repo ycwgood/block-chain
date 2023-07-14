@@ -222,6 +222,34 @@ def new_transaction():
     response = {'message': f'交易将会被添加到块 {index}'}
     return jsonify(response), 201
 
+# 添加交易接口2
+@app.route('/transactions/new', methods=['GET'])
+def new_transaction2():
+    # 获取查询字符串参数
+    query_params = request.args
+
+    # 检查指定的required参数是否存在
+    required = ['sender', 'recipient', 'amount']
+    missing_params = [param for param in required 
+                      if param not in query_params or not query_params[param]]
+
+    if missing_params:
+        # 存在缺失的参数
+        return '确少参数', 400
+
+    index = blockChain.new_transaction(query_params['sender'], query_params['recipient'],
+                                       query_params['amount'])
+
+    response = {'message': f'交易将会被添加到块 {index}'}
+    return jsonify(response), 201
+
+# 当前未打包的交易列表
+@app.route('/transactions', methods=['GET'])
+def transactions():
+    return Response(response=jsonpickle.encode(blockChain.current_transactions, unpicklable=False),
+                    status=200,
+                    mimetype="application/json")
+
 # 打包区块接口
 @app.route('/mine', methods=['GET'])
 def mine():
@@ -265,6 +293,21 @@ def register_nodes():
                     status=201,
                     mimetype="application/json")
 
+# index
+@app.route('/', methods=['GET'])
+def index():
+    return """
+        <a href='/chain' target='_blank'>查看整个区块链</a><br/>
+        <a href='/transactions/new?sender=&recipient=&amount=' target='_blank'>
+            添加交易
+        </a>
+        （注意：你需要通过在地址栏中填入交易的具体数值！）
+        <br/>
+        <a href='/transactions' target='_blank'>当前未打包的交易列表</a><br/>
+        <a href='/mine' target='_blank'>新建（打包）区块</a>
+        （打包之后你可以重新查看整个区块链）<br/>
+    """
+
 if __name__ == "__main__":
 
     parser = ArgumentParser()  # 命令行参数解析，端口默认5000
@@ -276,5 +319,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     port = args.port
 
-    app.run(host='127.0.0.1', port=port)  # 启动web服务，默认本机
+    app.run(host='0.0.0.0', port=port)  # 启动web服务，默认本机
 
