@@ -2,16 +2,24 @@
 
 ## python虚拟环境
 - 安装依赖
-  pip install pipenv
+```
+pip install pipenv
+```
 - 创建环境
-  pipenv install
+```
+pipenv install
+```
   会生成一个pipfile文件，用于管理库的依赖
 - 在虚拟环境中安装依赖
-  pipenv install flask==2.0.2
-  pipenv install requests==2.18.4
-  pipenv install jsonpickle
+```
+pipenv install flask==2.0.2
+pipenv install requests==2.18.4
+pipenv install jsonpickle
+```
 - 启动虚拟环境
-  pipenv shell
+```
+pipenv shell
+```
 
 ## 代码思路
 ### 三个类型
@@ -33,11 +41,12 @@ BlockChain.new_transaction()
 BlockChain.vaild_chain()
 
 ### Web接口
-#### /chain
-查看整条区块链
-#### /transactions/new
-添加交易
-#### /mine
-打包区块
+#### 查看整条区块链
+http://localhost:5000/chain
+#### 添加交易
+http://localhost:5000/transactions/new
+#### 打包区块
+http://localhost:5000/mine
+
 
 
