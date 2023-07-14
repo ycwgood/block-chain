@@ -1,6 +1,6 @@
 # block-chain
 
-## python虚拟环境
+## 1.python虚拟环境
 - 安装依赖
 ```
 pip install pipenv
@@ -21,8 +21,8 @@ pipenv install jsonpickle
 pipenv shell
 ```
 
-## 代码思路
-### 三个类型
+## 2.代码思路
+### 2.1三个类型
 #### Transaction 交易
 一条交易有sender, recipient, amount组成
 #### Block 区块
@@ -31,7 +31,7 @@ pipenv shell
 一个区块链有一系列区块列表组成
 还有参与这个区块链的工作节点集合
 
-### 区块链支持的操作
+### 2.2区块链支持的操作
 #### 新建（打包）区块
 BlockChain.new_block()
 其中的区块工作量字段(Block.proof)需要消耗计算资源才能生成
@@ -40,7 +40,7 @@ BlockChain.new_transaction()
 #### 验证区块链
 BlockChain.vaild_chain()
 
-### Web接口
+### 2.3Web接口
 #### 查看整条区块链
 http://localhost:5000/chain
 #### 添加交易
